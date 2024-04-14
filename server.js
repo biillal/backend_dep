@@ -14,6 +14,7 @@ app.use(express.json())
 // middleware router
 app.use('/api/v1/committees',require('./routers/committeesRouter'));
 app.use('/api/v1/registrations',require('./routers/registrationRouter'));
+app.use('/api/v1/userAdmin',require('./routers/userAdminRouter'));
 
 
 app.use('*',(req,res,next)=>{
