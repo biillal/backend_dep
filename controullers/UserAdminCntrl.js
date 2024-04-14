@@ -1,7 +1,7 @@
 const asyncHandler = require('express-async-handler');
 const { Admin } = require('../models/userAdmin');
 const bcrypt = require('bcrypt');
-const ApiError = require('../utilis/apiError');
+const ApiError = require('../utilis/ApiError');
 
 const createToken = (id, role) => {
     return jwt.sign({ id, role }, process.env.SECRET_KEY, {

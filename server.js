@@ -4,7 +4,7 @@ const database = require('./config/database');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const globalError = require('./middleware/errorMidlleware');
-const ApiError = require('./utilis/apiError');
+const ApiError = require('./utilis/ApiError');
 dotenv.config();
 database()
 app.use(cors({
