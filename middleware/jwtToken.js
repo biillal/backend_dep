@@ -1,7 +1,7 @@
 const asyncHandler = require('express-async-handler');
-const apiError = require('../utilis/apiError');
 const jwt = require('jsonwebtoken');
 const { Admin } = require('../models/userAdmin');
+const ApiError = require('../utilis/ApiError');
 const verifyToken = async (req, res, next) => {
     const authToken = req.headers.authorization
     if (authToken) {
@@ -11,14 +11,14 @@ const verifyToken = async (req, res, next) => {
             req.user = decodedPayload
             const currentUser = await Admin.findById(decodedPayload.id)
             if (!currentUser) {
-                return next(new apiError('the user that belong to this token does no longer exist', 401))
+                return next(new ApiError('the user that belong to this token does no longer exist', 401))
             }
             next()
         } catch (error) {
-            return next(new apiError('Invalid token, access denied', 401))
+            return next(new ApiError('Invalid token, access denied', 401))
         }
     } else {
-        return next(new apiError('no token provided, access denied', 401))
+        return next(new ApiError('no token provided, access denied', 401))
     }
 }
 
