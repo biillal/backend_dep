@@ -1,8 +1,9 @@
-const apiError = require("../utilis/apiError")
+const ApiError = require("../utilis/ApiError")
+
 const handlerJwtInvalidSignature = () =>
-    new apiError('Invalid token, please login again..', 401)
+    new ApiError('Invalid token, please login again..', 401)
 const handlerJwtExpired = () =>
-    new apiError('Expired token, please login again..', 401)
+    new ApiError('Expired token, please login again..', 401)
 
 const globalError = (err, req, res, next) => {
     err.statusCode = err.statusCode || 500
