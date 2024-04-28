@@ -11,10 +11,13 @@ app.use(cors({
     origin:"*"
 }))
 app.use(express.json())
+app.use('/files',express.static("files"));
 // middleware router
 app.use('/api/v1/committees',require('./routers/committeesRouter'));
 app.use('/api/v1/registrations',require('./routers/registrationRouter'));
 app.use('/api/v1/userAdmin',require('./routers/userAdminRouter'));
+app.use('/api/v1/active',require('./routers/activeRegRouter'));
+app.use('/api/v1/download',require('./routers/downloadRouter'));
 
 
 app.use('*',(req,res,next)=>{

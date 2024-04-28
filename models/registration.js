@@ -29,6 +29,15 @@ const registrationShema = mongoose.Schema({
         type: String,
         required: [true, "email  is require"]
     },
+    file:String,
+    gender:{
+        type:String,
+        required:[true,"gender is require"]
+    },
+    topic:{
+        type:String,
+        required:[true,"gender is require"]
+    },
 },{timestamps:true})
 
 const Registration = mongoose.model('registration', registrationShema);

@@ -39,3 +39,13 @@ module.exports.fetchAllAdmin = asyncHandler(async(req,res,next)=>{
     const admins = await Admin.find({})
     res.status(201).json({admins})
 })
+
+
+module.exports.deleteAdmin = asyncHandler(async (req, res, next) => {
+    const admin = await Admin.findByIdAndDelete(req.params.id)
+
+    if (!admin) {
+        res.status(404).json({ message: "admin not found" })
+    }
+    res.status(200).json({ message: "delete successfully" })
+})

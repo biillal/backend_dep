@@ -20,11 +20,11 @@ exports.createCommitteesValidator = [
 ]
 
 exports.updateCommitteesValidator = [
-    check('id').isMongoId().withMessage('Invalid product id'),
+    check('id').isMongoId().withMessage('Invalid committess id'),
     validatorMiddleware
 ]
 
 exports.deleteCommitteesValidator = [
-    check('id').isMongoId().withMessage('Invalid product id'),
+    check('id').isMongoId().withMessage('Invalid committees id'),
     validatorMiddleware
 ]
