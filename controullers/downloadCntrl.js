@@ -2,7 +2,7 @@ const asyncHandler = require('express-async-handler');
 const { uploads } = require('../utilis/cloudinary');
 const fs = require('fs');
 const { Download } = require('../models/download');
-
+const path = require('path')
 
 module.exports.createDownload = asyncHandler(async (req, res, next) => {
     const { title } = req.body
@@ -19,7 +19,6 @@ module.exports.createDownload = asyncHandler(async (req, res, next) => {
         file: filename
     })
     res.status(201).json({ message: 'created successfully' })
-    fs.unlinkSync(path)
 })
 
 
@@ -31,11 +30,13 @@ module.exports.getAllDownload = asyncHandler(async (req, res, next) => {
 
 module.exports.deleteDownload = asyncHandler(async (req, res, next) => {
     const download = await Download.findByIdAndDelete(req.params.id)
-
+    const imagePath = path.join(__dirname,`../file/${download.file}`)
+    console.log(imagePath);
     if (!download) {
         res.status(404).json({ message: "download not found" })
     }
     res.status(200).json({ message: "delete successfully" })
+    fs.unlinkSync(imagePath)
 })
 
 
