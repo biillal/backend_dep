@@ -2,11 +2,18 @@ const asyncHandler = require('express-async-handler');
 const { Registration } = require('../models/registration');
 const fs = require('fs')
 const path = require('path')
+const cloudinary = require('../utilis/cloudinary');
 module.exports.createRegistration = asyncHandler(async(req,res,next)=>{
     const {nom,prenom,institution,institutionAddress,ville,phone,email,gender,topic} = req.body
-    const filename = req.file.filename
+    const filePath = req.file.path
+    const result = await cloudinary.uploader.upload(filePath, {
+        resource_type: 'raw', // Important for non-image files
+    });
+    console.log(result);
+    
+    fs.unlinkSync(filePath);
     const registration = await Registration.create({
-        nom,prenom,institution,institutionAddress,ville,phone,email,file:filename,gender,topic
+        nom,prenom,institution,institutionAddress,ville,phone,email,file:result.secure_url,gender,topic
     })
     res.status(201).json({registration,result:"create successfully"})
 })
